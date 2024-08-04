@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useQuery } from '@tanstack/react-query';
 
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
@@ -67,9 +68,29 @@ const Index = () => {
     },
   });
 
+  const submitApplication = async (values) => {
+    try {
+      const response = await fetch('/api/submit-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to submit application');
+      }
+      
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
   function onSubmit(values) {
-    console.log(values);
-    setIsSubmitted(true);
+    submitApplication(values);
   }
 
   if (isSubmitted) {
