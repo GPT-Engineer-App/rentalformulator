@@ -21,32 +21,32 @@ const fromSupabase = async (query) => {
 
 ### rental_applications
 
-| name                      | type                     | format    | required |
-|---------------------------|--------------------------|-----------|----------|
-| id                        | integer                  | number    | true     |
-| full_name                 | character varying(255)   | string    | true     |
-| email                     | character varying(255)   | string    | true     |
-| phone                     | character varying(20)    | string    | true     |
-| current_address           | text                     | string    | true     |
-| employment_status         | character varying(20)    | string    | true     |
-| employer                  | character varying(255)   | string    | false    |
-| income                    | numeric                  | number    | true     |
-| rental_history            | text                     | string    | true     |
-| references_text           | text                     | string    | true     |
-| move_in_date              | date                     | string    | true     |
-| lease_term                | character varying(20)    | string    | true     |
-| pet_info                  | text                     | string    | false    |
-| vehicle_info              | text                     | string    | false    |
-| additional_occupants      | text                     | string    | false    |
-| criminal_history          | text                     | string    | false    |
-| eviction_history          | text                     | string    | false    |
-| bankruptcy_history        | text                     | string    | false    |
-| special_accommodations    | text                     | string    | false    |
-| consent_background_check  | boolean                  | boolean   | true     |
-| consent_credit_check      | boolean                  | boolean   | true     |
-| signature                 | character varying(255)   | string    | true     |
-| created_at                | timestamp with time zone | string    | false    |
-| updated_at                | timestamp with time zone | string    | false    |
+| name                     | type                     | format    | required |
+|--------------------------|--------------------------|-----------|----------|
+| id                       | integer                  | number    | true     |
+| full_name                | character varying(255)   | string    | true     |
+| email                    | character varying(255)   | string    | true     |
+| phone                    | character varying(20)    | string    | true     |
+| current_address          | text                     | string    | true     |
+| employment_status        | character varying(20)    | string    | true     |
+| employer                 | character varying(255)   | string    | false    |
+| income                   | numeric                  | number    | true     |
+| rental_history           | text                     | string    | true     |
+| references_text          | text                     | string    | true     |
+| move_in_date             | date                     | string    | true     |
+| lease_term               | character varying(20)    | string    | true     |
+| pet_info                 | text                     | string    | false    |
+| vehicle_info             | text                     | string    | false    |
+| additional_occupants     | text                     | string    | false    |
+| criminal_history         | text                     | string    | false    |
+| eviction_history         | text                     | string    | false    |
+| bankruptcy_history       | text                     | string    | false    |
+| special_accommodations   | text                     | string    | false    |
+| consent_background_check | boolean                  | boolean   | true     |
+| consent_credit_check     | boolean                  | boolean   | true     |
+| signature                | character varying(255)   | string    | true     |
+| created_at               | timestamp with time zone | string    | false    |
+| updated_at               | timestamp with time zone | string    | false    |
 
 */
 
