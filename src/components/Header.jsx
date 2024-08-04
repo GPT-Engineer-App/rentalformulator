@@ -13,12 +13,14 @@ import {
 import { useSupabaseAuth } from '@/integrations/supabase/auth';
 
 const Header = () => {
-  const { session, logout } = useSupabaseAuth();
+  const { session, logout } = useSupabaseAuth() || {};
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
-    setIsOpen(false);
+    if (logout) {
+      await logout();
+      setIsOpen(false);
+    }
   };
 
   return (
