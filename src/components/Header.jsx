@@ -63,7 +63,9 @@ const Header = () => {
           </DropdownMenu>
         ) : (
           <Link to="/login">
-            <Button>Login</Button>
+            <Avatar className="h-8 w-8 cursor-pointer">
+              <AvatarFallback>?</AvatarFallback>
+            </Avatar>
           </Link>
         )}
       </div>
