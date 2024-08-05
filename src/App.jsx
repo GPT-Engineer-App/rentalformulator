@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { navItems } from "./nav-items";
 import Header from "./components/Header";
+import ProfileDetails from "./pages/ProfileDetails";
+import ApplicationHistory from "./pages/ApplicationHistory";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const App = () => (
               {navItems.map(({ to, page }) => (
                 <Route key={to} path={to} element={page} />
               ))}
+              <Route path="/profile-details" element={<ProfileDetails />} />
+              <Route path="/application-history" element={<ApplicationHistory />} />
             </Routes>
           </main>
         </div>

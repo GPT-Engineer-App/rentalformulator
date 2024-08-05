@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +15,13 @@ import { useSupabaseAuth } from '@/integrations/supabase/auth';
 const Header = () => {
   const { session, logout } = useSupabaseAuth() || {};
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     if (logout) {
       await logout();
       setIsOpen(false);
+      navigate('/');
     }
   };
 
@@ -50,7 +52,7 @@ const Header = () => {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link to="/profile">Profile</Link>
+                <Link to="/profile-details">Profile Details</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/application-history">Application History</Link>
