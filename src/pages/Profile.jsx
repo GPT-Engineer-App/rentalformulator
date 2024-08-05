@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSupabaseAuth } from '@/integrations/supabase/auth';
+import { toast } from 'sonner';
 
 const profileSchema = z.object({
   fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
@@ -20,24 +21,41 @@ const Profile = () => {
   const form = useForm({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      fullName: session?.user?.user_metadata?.full_name || '',
-      email: session?.user?.email || '',
-      phone: session?.user?.user_metadata?.phone || '',
+      fullName: '',
+      email: '',
+      phone: '',
     },
   });
+
+  useEffect(() => {
+    if (session?.user) {
+      form.reset({
+        fullName: session.user.user_metadata?.full_name || '',
+        email: session.user.email || '',
+        phone: session.user.user_metadata?.phone || '',
+      });
+    }
+  }, [session, form]);
 
   const onSubmit = async (values) => {
     setIsUpdating(true);
     try {
-      await updateProfile(values);
-      // Show success message
+      await updateProfile({
+        full_name: values.fullName,
+        phone: values.phone,
+      });
+      toast.success('Profile updated successfully');
     } catch (error) {
       console.error('Error updating profile:', error);
-      // Show error message
+      toast.error('Failed to update profile');
     } finally {
       setIsUpdating(false);
     }
   };
+
+  if (!session) {
+    return <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">Please log in to view your profile.</div>;
+  }
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
